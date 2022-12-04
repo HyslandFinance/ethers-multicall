@@ -1,6 +1,6 @@
 {
-  "version": "0.2.3",
   "name": "ethers-multicall-hysland-finance",
+  "version": "0.2.4",
   "description": "Make multiple Ethereum network requests in a single HTTP query. ethcall for ethers v5.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

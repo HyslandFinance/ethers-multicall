@@ -1,5 +1,6 @@
 import {InfuraProvider} from '@ethersproject/providers';
 import { assert } from 'chai';
+import { ethers } from 'ethers';
 import { Contract, Provider } from '../src';
 
 const provider = new InfuraProvider('mainnet');
@@ -53,4 +54,19 @@ it('json abi', async () => {
 
   assert.equal(yfiSupply.toString(), '36666000000000000000000');
   assert.equal(uniSupply.toString(), '1000000000000000000000000000');
+});
+
+it('historic data', async () => {
+  const abi = ['function totalSupply() public view returns (uint256)'];
+  const crvAddress = '0xD533a949740bb3306d119CC777fa900bA034cd52';
+  const crv = new Contract(crvAddress, abi);
+  const testCases = [
+    { blockTag: 10647806, supply: '1303030303000000000000000000' },
+    { blockTag: 16000000, supply: '1854794513416445185592748811' },
+  ];
+  for (const testCase of testCases) {
+    const { blockTag, supply } = testCase;
+    const actualSupply = (await ethcallProvider.all([crv.totalSupply()], {blockTag}))[0];
+    assert.equal(actualSupply, supply);
+  }
 });

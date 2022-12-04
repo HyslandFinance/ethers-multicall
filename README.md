@@ -35,8 +35,9 @@ async function call() {
 
   const ethBalanceCall = ethcallProvider.getEthBalance(uniswapDaiPool);
   const daiBalanceCall = daiContract.balanceOf(uniswapDaiPool);
+  const overrides = { blockTag: 16000000 }
 
-  const [ethBalance, daiBalance] = await ethcallProvider.all([ethBalanceCall, daiBalanceCall]);
+  const [ethBalance, daiBalance] = await ethcallProvider.all([ethBalanceCall, daiBalanceCall], overrides);
 
   console.log('ETH Balance:', ethBalance.toString());
   console.log('DAI Balance:', daiBalance.toString());
