@@ -2,6 +2,8 @@
 
 Make multiple Ethereum network requests in a single HTTP query. [ethcall](https://github.com/Destiner/ethcall) for ethers v5.
 
+Forked from https://github.com/cavanmflynn/ethers-multicall https://www.npmjs.com/package/ethers-multicall
+
 ## API
 
 * `Contract(address, abi)`: Create contract instance; calling `contract.callFuncName` will yield a `call` object
@@ -33,8 +35,9 @@ async function call() {
 
   const ethBalanceCall = ethcallProvider.getEthBalance(uniswapDaiPool);
   const daiBalanceCall = daiContract.balanceOf(uniswapDaiPool);
+  const overrides = { blockTag: 16000000 }
 
-  const [ethBalance, daiBalance] = await ethcallProvider.all([ethBalanceCall, daiBalanceCall]);
+  const [ethBalance, daiBalance] = await ethcallProvider.all([ethBalanceCall, daiBalanceCall], overrides);
 
   console.log('ETH Balance:', ethBalance.toString());
   console.log('DAI Balance:', daiBalance.toString());

@@ -9,6 +9,7 @@ export async function all<T extends any[] = any[]>(
   calls: ContractCall[],
   multicallAddress: string,
   provider: Provider,
+  overrides: any,
 ): Promise<T> {
   const multicall = new Contract(multicallAddress, multicallAbi, provider);
   const callRequests = calls.map(call => {
@@ -18,7 +19,7 @@ export async function all<T extends any[] = any[]>(
       callData,
     };
   });
-  const response = await multicall.aggregate(callRequests);
+  const response = await multicall.aggregate(callRequests, overrides);
   const callCount = calls.length;
   const callResult = [] as T;
   for (let i = 0; i < callCount; i++) {
