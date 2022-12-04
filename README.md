@@ -2,6 +2,8 @@
 
 Make multiple Ethereum network requests in a single HTTP query. [ethcall](https://github.com/Destiner/ethcall) for ethers v5.
 
+Forked from https://github.com/cavanmflynn/ethers-multicall https://www.npmjs.com/package/ethers-multicall
+
 ## API
 
 * `Contract(address, abi)`: Create contract instance; calling `contract.callFuncName` will yield a `call` object
